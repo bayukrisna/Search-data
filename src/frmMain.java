@@ -31,6 +31,7 @@ public class frmMain extends javax.swing.JFrame {
      */
     public frmMain() {
         initComponents();
+        setDate(); setTime();
     }
 
     /**
@@ -287,12 +288,12 @@ public class frmMain extends javax.swing.JFrame {
         labeltanggal.setFont(new java.awt.Font("Lao UI", 1, 14)); // NOI18N
         labeltanggal.setText("Tanggal");
         jPanel5.add(labeltanggal);
-        labeltanggal.setBounds(710, 20, 80, 30);
+        labeltanggal.setBounds(750, 20, 80, 30);
 
         labeljam.setFont(new java.awt.Font("Lao UI", 1, 14)); // NOI18N
         labeljam.setText("Jam");
         jPanel5.add(labeljam);
-        labeljam.setBounds(790, 20, 80, 30);
+        labeljam.setBounds(830, 20, 150, 30);
 
         getContentPane().add(jPanel5);
         jPanel5.setBounds(0, 0, 1010, 670);
@@ -546,16 +547,16 @@ public class frmMain extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
         }
         tabel.setModel(dtm);
-    }
-    
-    public void setTanggal(){
-        java.util.Date skrg = new java.util.Date();
+    }   
+       
+    private void setDate() {
+        java.util.Date now = new java.util.Date();
         java.text.SimpleDateFormat kal = new java.text.SimpleDateFormat("dd/MM/yyyy");
-        labeltanggal.setText(kal.format(skrg));
+        labeltanggal.setText(kal.format(now));
     }
-    
-    public void setJam(){
-        ActionListener taskPerformer = new ActionListener() {
+
+    private void setTime() {
+         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 String nol_jam = "";
                 String nol_menit = "";
@@ -565,6 +566,7 @@ public class frmMain extends javax.swing.JFrame {
             int nilai_jam = dt.getHours();
             int nilai_menit = dt.getMinutes();
             int nilai_detik = dt.getSeconds();
+            
             if (nilai_jam <= 9) {
             nol_jam = "0";
         }
@@ -577,7 +579,7 @@ public class frmMain extends javax.swing.JFrame {
             String jam = nol_jam + Integer.toString(nilai_jam);
             String menit = nol_menit + Integer.toString(nilai_menit);
             String detik = nol_detik + Integer.toString(nilai_detik);
-            labeljam.setText("Jam "+jam + ";" + menit + ";" + detik);
+            labeljam.setText(jam + ";" + menit + ";" + detik);
         }
     };
         new Timer(100, taskPerformer).start();
