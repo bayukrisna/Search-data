@@ -58,7 +58,7 @@ public class file_koneksi {
                     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 }
             };
-            koneksi = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/db_testkoneksi?zeroDateTimeBehavior=convertToNull","root","");
+            koneksi = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/db_utspbo?zeroDateTimeBehavior=convertToNull","root","");
         }
         return koneksi;
     }

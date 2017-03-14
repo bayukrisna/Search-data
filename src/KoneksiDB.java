@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class KoneksiDB {
     public static Connection setKoneksi() {
-    String konString = "jdbc:mysql://localhost:3306/db_testkoneksi";
+    String konString = "jdbc:mysql://localhost:3306/db_utspbo";
     Connection koneksi = null;
     
     try {
