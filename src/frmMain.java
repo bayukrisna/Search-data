@@ -52,11 +52,13 @@ public class frmMain extends javax.swing.JFrame {
         b1 = new javax.swing.JLabel();
         idbar = new javax.swing.JTextField();
         nama = new javax.swing.JTextField();
-        b3 = new javax.swing.JLabel();
         b10 = new javax.swing.JLabel();
         b4 = new javax.swing.JLabel();
         harga = new javax.swing.JTextField();
         jumbar = new javax.swing.JTextField();
+        b5 = new javax.swing.JLabel();
+        cariid = new javax.swing.JTextField();
+        b6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         save = new javax.swing.JButton();
         delete = new javax.swing.JButton();
@@ -71,10 +73,18 @@ public class frmMain extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         tot = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        kasirmanja = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         jPanel5.setBackground(new java.awt.Color(153, 204, 0));
@@ -130,11 +140,6 @@ public class frmMain extends javax.swing.JFrame {
         jPanel1.add(nama);
         nama.setBounds(120, 90, 190, 30);
 
-        b3.setFont(new java.awt.Font("Lao UI", 1, 14)); // NOI18N
-        b3.setText("Jumlah Barang");
-        jPanel1.add(b3);
-        b3.setBounds(10, 190, 110, 30);
-
         b10.setFont(new java.awt.Font("Lao UI", 1, 14)); // NOI18N
         b10.setText("Nama Barang");
         jPanel1.add(b10);
@@ -144,6 +149,12 @@ public class frmMain extends javax.swing.JFrame {
         b4.setText("Harga Barang");
         jPanel1.add(b4);
         b4.setBounds(10, 140, 110, 30);
+
+        harga.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hargaActionPerformed(evt);
+            }
+        });
         jPanel1.add(harga);
         harga.setBounds(120, 140, 190, 30);
 
@@ -155,8 +166,20 @@ public class frmMain extends javax.swing.JFrame {
         jPanel1.add(jumbar);
         jumbar.setBounds(120, 190, 190, 30);
 
+        b5.setFont(new java.awt.Font("Lao UI", 1, 14)); // NOI18N
+        b5.setText("Cari id");
+        jPanel1.add(b5);
+        b5.setBounds(10, 240, 110, 30);
+        jPanel1.add(cariid);
+        cariid.setBounds(120, 240, 190, 30);
+
+        b6.setFont(new java.awt.Font("Lao UI", 1, 14)); // NOI18N
+        b6.setText("Jumlah Barang");
+        jPanel1.add(b6);
+        b6.setBounds(10, 190, 110, 30);
+
         jPanel5.add(jPanel1);
-        jPanel1.setBounds(20, 70, 320, 250);
+        jPanel1.setBounds(20, 70, 320, 290);
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 153));
         jPanel2.setLayout(null);
@@ -251,27 +274,49 @@ public class frmMain extends javax.swing.JFrame {
         tot.setFont(new java.awt.Font("Swis721 Hv BT", 1, 24)); // NOI18N
         tot.setText("0");
         jPanel5.add(tot);
-        tot.setBounds(340, 330, 130, 50);
+        tot.setBounds(730, 330, 130, 50);
 
         jLabel4.setFont(new java.awt.Font("Swis721 Hv BT", 1, 24)); // NOI18N
         jLabel4.setText("BAYAR :");
         jPanel5.add(jLabel4);
-        jLabel4.setBounds(120, 330, 140, 50);
+        jLabel4.setBounds(510, 330, 140, 50);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel3.setText("KASIR : BAYU KRISNA");
-        jPanel5.add(jLabel3);
-        jLabel3.setBounds(30, 20, 210, 40);
+        kasirmanja.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jPanel5.add(kasirmanja);
+        kasirmanja.setBounds(80, 20, 50, 40);
 
         jLabel5.setFont(new java.awt.Font("Swis721 Hv BT", 1, 24)); // NOI18N
         jLabel5.setText("Rp. ");
         jPanel5.add(jLabel5);
-        jLabel5.setBounds(260, 330, 70, 50);
+        jLabel5.setBounds(650, 330, 70, 50);
+
+        jButton2.setText("DISKON");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton2);
+        jButton2.setBounds(350, 330, 140, 50);
+
+        jButton3.setText("Search");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(jButton3);
+        jButton3.setBounds(20, 370, 320, 30);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setText("KASIR :");
+        jPanel5.add(jLabel6);
+        jLabel6.setBounds(30, 20, 50, 40);
 
         getContentPane().add(jPanel5);
-        jPanel5.setBounds(0, 0, 1010, 480);
+        jPanel5.setBounds(10, 10, 1470, 470);
 
-        setBounds(0, 0, 1025, 520);
+        setBounds(0, 0, 1489, 520);
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
@@ -359,8 +404,7 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_editActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String SQL = "DELETE FROM tabel_barang";
-        int status = KoneksiDB.execute(SQL);
+
         dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -394,6 +438,54 @@ public class frmMain extends javax.swing.JFrame {
     private void jumbarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jumbarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jumbarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int disk = 90;
+        int diskon = Integer.parseInt(tot.getText());
+        if(diskon>=100000){
+            int dis = diskon*disk/100;
+            tot.setText(Integer.toString(dis));
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void hargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hargaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_hargaActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         String str = cariid.getText();
+            String kolom[]={"ID Barang","Nama Barang","Harga Barang","Jumlah Barang","Total Harga"};
+            DefaultTableModel dtm=new DefaultTableModel(null, kolom);
+            String SQL="SELECT * FROM tabel_barang WHERE id_barang='"+str+"'";
+ 
+            //Excuting Query
+            ResultSet rs = KoneksiDB.executeQuery(SQL);
+ 
+         try {
+                //Sets Records in TextFields.
+                while(rs.next()){
+                String id=rs.getString(1);
+                String NamaBarang=rs.getString(2);
+                String HargaBarang=rs.getString(3);
+                String TotalBarang=rs.getString(4);
+                String TotalHarga=rs.getString(5);
+                String data[]={id,NamaBarang,HargaBarang,TotalBarang,TotalHarga};
+                dtm.addRow(data);
+                }
+            //Create Exception Handler
+        } catch (SQLException ex) {
+
+        }
+         tabel.setModel(dtm);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        String admin = Login.user;
+        kasirmanja.setText(admin);
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -433,27 +525,32 @@ public class frmMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel b1;
     private javax.swing.JLabel b10;
-    private javax.swing.JLabel b3;
     private javax.swing.JLabel b4;
+    private javax.swing.JLabel b5;
+    private javax.swing.JLabel b6;
     private javax.swing.JButton btnprint;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField cariid;
     private javax.swing.JButton clear;
     private javax.swing.JButton delete;
     private javax.swing.JButton edit;
     private javax.swing.JTextField harga;
     private javax.swing.JTextField idbar;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jumbar;
+    private javax.swing.JLabel kasirmanja;
     private javax.swing.JLabel labeljam;
     private javax.swing.JLabel labeltanggal;
     private javax.swing.JTextField nama;

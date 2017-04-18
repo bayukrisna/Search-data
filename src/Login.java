@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  * @author Bayu
  */
 public class Login extends javax.swing.JFrame {
-
+public static String user;
     /**
      * Creates new form Login
      */
@@ -87,61 +87,26 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(100, 100, 70, 30);
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 0));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 0));
+        jPanel2.setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 0));
+        jPanel1.setLayout(null);
 
         jLabel4.setFont(new java.awt.Font("Mistral", 2, 18)); // NOI18N
         jLabel4.setText("Registration Is Important !");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(133, 261, 182, 26);
+        jPanel1.add(txtpass);
+        txtpass.setBounds(166, 129, 121, 31);
 
         jLabel3.setFont(new java.awt.Font("Sitka Small", 1, 36)); // NOI18N
         jLabel3.setText("FIRST PAGE");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(98, 11, 270, 50);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(123, 123, 123))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(101, 101, 101)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
-        );
+        jPanel2.add(jPanel1);
+        jPanel1.setBounds(23, 21, 410, 298);
 
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 0, 460, 350);
@@ -155,7 +120,7 @@ public class Login extends javax.swing.JFrame {
         
         try {
             try(Statement statement = (Statement) file_koneksi.GetConnection().createStatement()) {
-                statement.executeUpdate("insert into tb_akun(username,password) VALUES ('"+username+"','"+password+"');");
+                statement.executeUpdate("insert into tabel_login(username,password) VALUES ('"+username+"','"+password+"');");
             } 
             JOptionPane.showMessageDialog(null,"Selamat! Anda berhasil Sign Up!");
         }
@@ -168,13 +133,14 @@ public class Login extends javax.swing.JFrame {
         Connection connection;
         PreparedStatement ps;
         try{
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_testkoneksi?zeroDateTimeBehavior=convertToNull", "root", "");
-            ps = connection.prepareStatement("SELECT `username`, `password` FROM `tb_akun` WHERE `username` = ? AND `password` = ?");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_utspbo?zeroDateTimeBehavior=convertToNull", "root", "");
+            ps = connection.prepareStatement("SELECT `username`, `password` FROM `tabel_login` WHERE `username` = ? AND `password` = ?");
             ps.setString(1, txtnama.getText());
             ps.setString(2, txtpass.getText());
             ResultSet result = ps.executeQuery();
             if(result.next()){
                 new frmMain().show();
+                user = txtnama.getText();
                 this.dispose();
             }
             else {
